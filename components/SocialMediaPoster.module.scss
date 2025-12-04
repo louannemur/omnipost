@@ -1,0 +1,248 @@
+// Sacred OmniPost Styles
+// Colors
+$cream: #F2F0E9;
+$black: #121212;
+$red: #C22828;
+$paper: #FFFCF5;
+$dim: #A8A69E;
+
+.root {
+  // Set theme CSS variables for Button component
+  --theme-background: #{$cream};
+  --theme-text: #{$black};
+  --theme-border: #{$black};
+  --theme-button: #{$black};
+  --theme-button-text: #{$cream};
+  --theme-focused-foreground: #{$dim};
+  --font-family-mono: 'GeistMono-Regular', Consolas, monaco, monospace;
+  --font-size: 11px;
+  --theme-line-height-base: 1.5;
+
+  min-height: 100vh;
+  background-color: $cream;
+  background-image: radial-gradient(circle, rgba($black, 0.20) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: $black;
+  font-family: var(--font-family-mono);
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+// Navigation
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  margin: -24px -32px 0;
+  background: $cream;
+  border-bottom: 1px solid rgba($black, 0.1);
+
+  button {
+    width: auto;
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.logo {
+  font-family: var(--font-family-mono);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.modeToggle {
+  display: flex;
+  border: 2px solid $black;
+}
+
+// Main content
+.main {
+  flex-grow: 1;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 32px;
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sectionLabel {
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $dim;
+  background: $cream;
+  display: inline-block;
+  padding: 2px 6px;
+}
+
+// Platform selection container
+.platformGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+
+// Tabs container for fractured mode
+.tabBar {
+  display: flex;
+  padding: 16px 20px 0;
+  border-bottom: 1px solid rgba($black, 0.1);
+}
+
+.tabError {
+  color: $red;
+}
+
+.tabErrorIcon {
+  color: $red;
+  font-weight: 700;
+}
+
+// Editor area
+.editorArea {
+  padding: 24px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 280px;
+  padding: 0;
+  font-family: var(--font-family-mono);
+  font-size: 16px;
+  line-height: 1.6;
+  color: $black;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+
+  &::placeholder {
+    color: $dim;
+  }
+}
+
+.editorFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba($black, 0.1);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.charCount {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: $dim;
+  letter-spacing: 0.03em;
+}
+
+.charCountError {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: $red;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.editorActions {
+  display: flex;
+  gap: 12px;
+}
+
+// Error banner
+.errorBanner {
+  background: #FEF2F2;
+  border: 2px solid #FCA5A5;
+  padding: 16px 20px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.errorText {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #991B1B;
+  margin-bottom: 4px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.disclaimer {
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  color: $dim;
+  margin-top: 12px;
+  text-align: center;
+  background: $cream;
+  display: inline-block;
+  padding: 2px 6px;
+  width: 100%;
+}
+
+// Footer
+.footer {
+  margin-top: 48px;
+  text-align: center;
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $dim;
+  background: $cream;
+  display: inline-block;
+  padding: 8px 16px;
+  align-self: center;
+
+  a {
+    color: $dim;
+    text-decoration: underline;
+    background: transparent;
+
+    &:hover {
+      color: $black;
+    }
+  }
+}
