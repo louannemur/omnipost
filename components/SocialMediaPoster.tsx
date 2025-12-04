@@ -27,6 +27,7 @@ export default function SocialMediaPoster() {
   const [unifiedContent, setUnifiedContent] = React.useState<string>('');
   const [fracturedContent, setFracturedContent] = React.useState<Record<string, string>>({});
   const [activeTab, setActiveTab] = React.useState<string>('unified');
+  const [popupBlocked, setPopupBlocked] = React.useState<boolean>(false);
 
   // Sync active tab with mode and selection
   React.useEffect(() => {
@@ -123,15 +124,22 @@ export default function SocialMediaPoster() {
   const handlePost = () => {
     if (!canPost) return;
     const platformIds = Array.from(selectedPlatforms);
+    let blockedCount = 0;
+
+    // Use small delays between each pop-up to avoid browser blocking
     platformIds.forEach((platformId, index) => {
       const platform = PLATFORMS.find(p => p.id === platformId);
       if (platform) {
         const text = mode === 'unified' ? unifiedContent : (fracturedContent[platformId] ?? unifiedContent);
         if (text.trim()) {
-          // Stagger window.open calls to avoid pop-up blocker
+          // Small delay between each window to avoid pop-up blocker
           setTimeout(() => {
-            window.open(platform.url + encodeURIComponent(text), '_blank');
-          }, index * 500);
+            const newWindow = window.open(platform.url + encodeURIComponent(text), '_blank');
+            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+              blockedCount++;
+              setPopupBlocked(true);
+            }
+          }, index * 100);
         }
       }
     });
@@ -274,7 +282,27 @@ export default function SocialMediaPoster() {
             ))}
           </div>
         )}
+
       </main>
+
+      {/* Pop-up Blocked Modal */}
+      {popupBlocked && (
+        <div className={styles.modalOverlay} onClick={() => setPopupBlocked(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalTitle}>Pop-ups Blocked</div>
+            <div className={styles.modalContent}>
+              <p>Your browser is blocking pop-ups, which prevents OmniPost from opening multiple platforms.</p>
+              <p><strong>To allow pop-ups:</strong></p>
+              <p><strong>Chrome/Arc:</strong> Click the blocked pop-up icon (🚫) in the address bar and select "Always allow"</p>
+              <p><strong>Firefox:</strong> Click the preferences icon in the address bar and uncheck "Block pop-up windows"</p>
+              <p><strong>Safari:</strong> Safari → Settings → Websites → Pop-up Windows, then set to "Allow"</p>
+            </div>
+            <div className={styles.modalActions}>
+              <Button onClick={() => setPopupBlocked(false)}>Got It</Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className={styles.footer}>
         <div>OmniPost by <a href="https://x.com/louannemmurphy" target="_blank" rel="noopener noreferrer">Louanne Murphy</a></div>

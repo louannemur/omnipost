@@ -223,6 +223,66 @@ $dim: #A8A69E;
 }
 
 // Footer
+// Modal
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($black, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.modal {
+  background: $paper;
+  border: 2px solid $black;
+  max-width: 500px;
+  width: 100%;
+  padding: 32px;
+  position: relative;
+}
+
+.modalTitle {
+  font-family: var(--font-family-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: $red;
+}
+
+.modalContent {
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: $black;
+  margin-bottom: 24px;
+
+  p {
+    margin-bottom: 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
 .footer {
   margin-top: 48px;
   text-align: center;
